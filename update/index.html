@@ -1,0 +1,57 @@
+<!doctype html>
+<html>
+<head>
+<link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap.min.css"><!-- load bootstrap -->
+  <style>
+    html                    { overflow-y:scroll; text:white;}
+    body                    { padding-top:50px; background: black; text:white;}
+    font                    { color:white;}
+    p                       { text-color:white;color:white;}
+    .jumbothron             { margin-bottom: 0px;}
+    .links                  { padding-top: 50px;padding-bottom: 15px;bottom:50px} 
+    .element                { margin-bottom:30px; background:black;color:white;}
+    .verticalLine           { border-bottom: thick solid white;border-radius:15px}
+    .icon                   { color:white;width:100px;height:100px}
+  </style>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.6.3/css/font-awesome.min.css">
+  <script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script><!-- load jquery -->    
+<!-- SPELLS -->
+  <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.0.8/angular.min.js"></script><!-- load angular -->
+</head>
+<body >
+<script src="/js/typed.js"></script>
+<div class="col-md-3"></div>
+<div class="container">
+  <div  class="jumbothron text-center col-md-6">
+    <div class="row"><font class="element" size=6></font>
+    <div class="verticalLine text-center"></div></div></br></br>
+    <div class="row"> 
+    <p id="typed"></p>
+    </div>
+  </div>
+</div>
+<div class="row links footer">
+  <ul class="list-inline text-center">
+    <li><a href="https://www.github.com/jamesthechamp"><i class="fa fa-github icon" style="font-size:48px"></i></a></li>
+    
+    <li><a href=""><i class="fa fa-file-text icon" style="font-size:48px"></i></a></li>
+    <li><a href="https://www.facebook.com/shivansh.bajaj.5"><i class="fa fa-facebook-square icon" style="font-size:48px"></i></a></li>
+    <li><a href="https://www.linkedin.com/in/shivansh-bajaj-602224a5"><i class="fa fa-linkedin-square icon" style="font-size:48px"></i></a></li>
+  </ul>
+</div>
+<script>
+  $(function(){
+      $("#typed").typed({
+        strings:[''],
+	typeSpeed:20,
+	startDelay:1500
+      });
+      $(".element").typed({
+        strings:['Hey i am <b>Shivansh Bajaj</b>'],
+        typeSpeed:10
+      });
+  });
+</script>
+
+</body>
+</html>
