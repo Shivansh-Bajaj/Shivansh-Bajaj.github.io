@@ -1,93 +1,91 @@
-<html lang="en">
+<!doctype html>
+<html>
 <head>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="description" content="A layout example that shows off a blog page with a list of posts.">
-  <title>jamesthechamp</title>
-  <link rel="stylesheet" href="http://yui.yahooapis.com/pure/0.6.0/pure-min.css">
-  <!--[if lte IE 8]>
-  <link rel="stylesheet" href="http://yui.yahooapis.com/pure/0.6.0/grids-responsive-old-ie-min.css">
-  <![endif]-->
-  <!--[if gt IE 8]><!-->
-  <link rel="stylesheet" href="http://yui.yahooapis.com/pure/0.6.0/grids-responsive-min.css">
-  <!--[if lte IE 8]>
-      <link rel="stylesheet" href="css/layouts/blog-old-ie.css">
-  <![endif]-->
-  <!--[if gt IE 8]><!-->
-      <link rel="stylesheet" href="css/layouts/blog.css">
-  <!--<![endif]-->
+<link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap.min.css"><!-- load bootstrap -->
+  <style>
+    html                    { overflow-y:scroll; text:white;}
+    body                    { padding-top:50px; background: black; text:white;}
+    font                    { color:white;}
+    p                       { text-color:white;color:white;}
+    button                  { text-color:black;}
+    .jumbothron             { margin-bottom: 0px;}
+    .links                  {}
+    .element                { margin-bottom:30px; background:black;color:white;}
+    .verticalLine           { border-bottom: thick solid white;border-radius:15px}
+    .icon                   { color:white;width:100px;height:100px}
+    .hide                   { display:none;}
+  </style>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+  <script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script><!-- load jquery -->
+<!-- SPELLS -->
+  <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.0.8/angular.min.js"></script><!-- load angular -->
+  <script>
+  $(window).load(function(){
+    $("#typed").typed({
+        strings:['<br />I am passionate developer a music lover.<br />'],
+	    typeSpeed:20,
+	    startDelay:1200
+    });
+    $(".element").typed({
+        strings:['Hey i am <b>Shivansh Bajaj</b>'],
+        typeSpeed:10
+    });
+  });
+
+  </script>
 </head>
-<body>
-<div id="layout" class="pure-g">
-
-    <div class="sidebar pure-u-1 pure-u-md-1-4">
-
-        <div class="header">
-          <div>
-          </div>
-            <h1><a href="">james the champ |</a> Works</h1>
-            <h2 class="brand-tagline"></h2>
-            <nav class="nav">
-                <ul class="nav-list">
-
-                  <!--  <li class="nav-item">
-                        <a class="pure-button" href="#">kde-sok</a>
-                    </li>-->
-                    <li class="nav-item">
-                        <a class="pure-button" href="../KDESoK.html">KDE SOK</a>
-                    </li>
-                    <!--
-                    <li class="nav-item">
-                        <a class="pure-button" href="http://yuilibrary.com"></a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="pure-button" href="http://yuilibrary.com">Owares activity</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="pure-button" href="http://yuilibrary.com">Owares activity</a>
-                    </li>-->
-                </ul>
-            </nav>
-        </div>
-    </div>
-    <div id="aboutMe" class="content pure-u-1 pure-u-md-3-4">
-
+  <script src="js/typed.js"></script><!-- load angular -->
+<body >
+<script src="/js/typed.js"></script>
+<div class="container">
+  <div  class="jumbothron text-center col-md-12">
+    <div class="row"><font class="element" size=6></font>
+    <!--<div class="row"><font class="element2" size=6></font>-->
+   <div class="verticalLine text-center"></div></div></br></br>
         <div>
-            <!-- A wrapper for all the blog posts -->
-            <div class="posts">
-                <h1 class="content-subhead"></h1>
+          <button id="myresume" class="btn hide btn-default btn-md" role="button"><b>MY RESUME</b></button>
+        </div>
+        <!-- <div>
+         <button id="aboutme" class="btn hide btn-default btn-md" role="button"><b>ABOUT ME</b></button>
+         <button id="myresume" class="btn hide btn-default btn-md" role="button"><b>MY RESUME</b></button>
+        </div> -->
+           <font size=3 id="typed"></font><br /><br />
+           <!-- <p id="typed2"></p> -->
+  </div>
 
-                <!-- A single blog post -->
-                <section class="post">
-                    <header class="post-header">
-                        <h2 class="post-title">Hey this is Shivansh !!</h2>
-                        <p class="post-meta">
-                        </p>
-                    </header>
+<div class="links">
+  <ul class="list-inline text-center">
+    <li><a href="https://www.github.com/jamesthechamp"><i class="fa fa-github icon" style="font-size:48px"></i></a></li>
 
-                    <div class="post-description"><p></p>
-                        <p>Get in touch with me by sending an email to <a href="mailto:bajajshivansh1@gmail.com">bajajshivansh1@gmail.com</a>  </p>
-                    </div>
-                    <br /><br />
-                      </div>
+    <li><a href="mailto:bajajshivansh1@gmail.com"><i class="fa fa-envelope-open-o icon" aria-hidden="true" style="font-size:48px"></i></a></li>
+    <li><a href="https://www.facebook.com/shivansh.bajaj.5"><i class="fa fa-facebook-square icon" style="font-size:48px"></i></a></li>
+    <li><a href="https://www.linkedin.com/in/shivansh-bajaj-602224a5"><i class="fa fa-linkedin-square icon" style="font-size:48px"></i></a></li>
+  </ul>
+</div>
 
-                            <!--  <li class="nav-item">
-                                  <a class="pure-button" href="#">kde-sok</a>
-                              </li>-->
-                                  <a class="pure-button" href="Resume.pdf">My Resume</a>
-                                  <a class="pure-button pure-button-primary" href="https://www.github.com/jamesthechamp">Github</a>
-                              <!--
-                              <li class="nav-item">
-                                  <a class="pure-button" href="http://yuilibrary.com"></a>
-                              </li>
-                              <li class="nav-item">
-                                  <a class="pure-button" href="http://yuilibrary.com">Owares activity</a>
-                              </li>
-                              <li class="nav-item">
-                                  <a class="pure-button" href="http://yuilibrary.com">Owares activity</a>
-                              </li>-->
+</div>
+<script>
+    //   $("#hireme").click(function(){
+    //     $(this).hide(700);
+    //     $("#aboutme,#myresume").removeClass('hide');
+    //     $("#aboutme,#myresume").hide();
+    //     $("#aboutme,#myresume").fadeIn(3000);
+    //
+    // });
+    // $("#aboutme").click(function(){
+    //
+    //  $("#typed,.element").hide(500);
+    //  $("#typed2").typed({
+    //     strings:['<br />I am passionate developer a musi<br />'],
+	  //   typeSpeed:20,
+	  //   startDelay:800
+    // });
+    // $(".element2").typed({
+    //     strings:['About Me'],
+    //     typeSpeed:10
+    // });
+    // });
+</script>
 
-                </section>
-          </div>
-      </div>
-    </div>
+</body>
+</html>
