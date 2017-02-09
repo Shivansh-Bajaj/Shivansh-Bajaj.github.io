@@ -1,7 +1,8 @@
 <!doctype html>
 <html>
 <head>
-<link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap.min.css"><!-- load bootstrap -->
+	<title>Shivansh Bajaj | James</title>
+  <link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap.min.css"><!-- load bootstrap -->
   <style>
     html                    { overflow-y:scroll; text:white;}
     body                    { padding-top:50px; background: black; text:white;}
@@ -14,19 +15,38 @@
     .verticalLine           { border-bottom: thick solid white;border-radius:15px}
     .icon                   { color:white;width:100px;height:100px}
     .hide                   { display:none;}
+    .typed-cursor           {display: none;}
   </style>
+  <meta name="author" content="Made with ❤ by Jorge Epuñan - @csslab">
+  <link rel="stylesheet" href="css/style_v.css" media="screen" />
+
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js"></script>
+  <script src="js/jquery.timelinr-0.9.6.js"></script>
+  <script>
+    $(function(){
+      $().timelinr({
+        orientation: 	'vertical',
+        issuesSpeed: 	300,
+        datesSpeed: 	100,
+        arrowKeys: 		'false',
+        startAt:			2
+      })
+    });
+  </script>
+
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-  <script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script><!-- load jquery -->
+  <!-- <script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script><!-- load jquery -->
 <!-- SPELLS -->
   <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.0.8/angular.min.js"></script><!-- load angular -->
   <script>
   $(window).load(function(){
+    $("#timeline").hide();
     $("#typed").typed({
-        strings:['<br />I am passionate developer a music lover.<br />'],
+        strings:['<br />Hey i am Full Stack developer and a Computer Science student currently pursuing my BTech from The LNM Institute of Information Technology, Jaipur..<br />'],
 	    typeSpeed:20,
 	    startDelay:1200
     });
-    $(".element").typed({
+    $("#abouthead").typed({
         strings:['Hey i am <b>Shivansh Bajaj</b>'],
         typeSpeed:10
     });
@@ -38,20 +58,65 @@
 <body >
 <script src="/js/typed.js"></script>
 <div class="container">
-  <div  class="jumbothron text-center col-md-12">
-    <div class="row"><font class="element" size=6></font>
-    <!--<div class="row"><font class="element2" size=6></font>-->
+  <div id="about" class="jumbothron text-center col-md-12">
+    <div class="row"><font id="abouthead" class="element" size=6></font>
    <div class="verticalLine text-center"></div></div></br></br>
-   <div>
+     <div>
+       <a href="#" id="work" class="btn btn-default btn-lg" role="button"><b>MY WORK</b></a>
+       <a href="#about" id="aboutme" class="btn btn-default btn-lg" role="button"><b>ABOUT ME</b></a>
      <a href="../Resume.pdf" id="myresume" class="btn btn-default btn-lg" role="button"><b>MY RESUME</b></a>
-   </div> 
+     </div>
+
    <font size=4 id="typed"></font><br /><br />
+  </div>
+  	<div id="timeline">
+  		<ul id="dates">
+  			<li><a href="#tripshire" class="selected">Tripshire</a></li>
+  			<li><a href="#consulto">Consultoapp</a></li>
+  			<li><a href="#hitchhike">HitchHike</a></li>
+  			<li><a href="#KDE-SOK">KDE-SoK</a></li>
+  			<li><a href="#travel-x">travel-X</a></li>
+  		</ul>
+  		<ul id="issues">
+  			<li id="tripshire" class="selected">
+  				<img src="images/tripshire.png" width="100%" height="256" />
+  				<br /><br />
+  				<h1><a href="http://tripshire.com/">tripshire.com</a></h1>
+  				<p> powerful and disruptive tool to help you plan your next holiday!!</p>
+  			</li>
+  			<li id="consulto">
+  				<img src="images/consultoapp.png" width="100%" height="256" />
+  				<br /><br />
+  				<h1><a href="http://consultoapp.com/">Consultoapp.com</a></h1>
+  				<p>The simplest way to seek professional advice. Connect with an expert anytime, anywhere. </p>
+  			</li>
+  			<li id="hitchhike">
+  				<img src="images/hitchhike.png" width="100%" height="256" />
+  				<br /><br />
+  				<h1><a href="https://github.com/jamesthechamp/HitchHike-1">HitchHike</a></h1>
+  				<p><b>GITHUB</b>: <a href="https://github.com/jamesthechamp/HitchHike-1">https://github.com/jamesthechamp/HitchHike-1</a> <br />A real time application helps connect a ‘drivers with empty seats’ to ‘co-travellers looking for a ride’.</p>
+  			</li>
+  			<li id="KDE-SOK">
+  				<img src="images/GCompris.png" width="100%" height="256" />
+  				<br /><br />
+  				<h1><a href="https://community.kde.org/SoK/Ideas/2015#Project:_Adding.2Fporting.2Fimproving_GCompris_activities">KDE-SoK 2015 Under GCompris</a></h1>
+  				<p>Season of KDE is an outreach program hosted by the KDE community.</p>
+  			</li>
+  			<li id="travel-x">
+  				<img src="images/travelx.png" width="100%" height="256" />
+  				<br /><br />
+  				<h1><a href="http://travel-x-01.herokuapp.com/">travel-x-v01</a></h1>
+  				<p><b>GITHUB</b>: <a href="https://github.com/jamesthechamp/travelx1.01">https://github.com/jamesthechamp/travelx1.01</a> <br />All middle class people need is the most economical way to travel for work and it is not a bad idea to promote public transport by minimizing the cost of travel. Well thats our idea, we will provide you with the most efficient and economical way to travel whether you are alone or with a group, may it be a cab or a bus </p>
+  			</li>
+
+  		</ul>
+  	</div>
+
   </div>
 
 <div class="links">
   <ul class="list-inline text-center">
     <li><a href="https://www.github.com/jamesthechamp"><i class="fa fa-github icon" style="font-size:48px"></i></a></li>
-
     <li><a href="mailto:bajajshivansh1@gmail.com"><i class="fa fa-envelope-open-o icon" aria-hidden="true" style="font-size:48px"></i></a></li>
     <li><a href="https://www.facebook.com/shivansh.bajaj.5"><i class="fa fa-facebook-square icon" style="font-size:48px"></i></a></li>
     <li><a href="https://www.linkedin.com/in/shivansh-bajaj-602224a5"><i class="fa fa-linkedin-square icon" style="font-size:48px"></i></a></li>
@@ -59,7 +124,36 @@
 </div>
 
 </div>
+<script>
+$(window).load(function(){
+  $("#work").click(function () {
+    console.log("work");
+    $("#typed").typed({
+        strings:[''],
+	    typeSpeed:20,
+	    startDelay:1200
+    }).hide();
+    $("#abouthead").typed({
+        strings:['Some of previous my work'],
+        typeSpeed:10
+    }).show();
+    $("#timeline").fadeIn(500);
+  });
+  $("#aboutme").click(function () {
+    console.log("aboutme");
+    $("#timeline").hide();
+    $("#abouthead").typed({
+        strings:['Hey i am <b>Shivansh Bajaj</b>'],
+        typeSpeed:10
+    }).show();
+    $("#typed").typed({
+        strings:['<br />I am passionate developer a music lover.<br />'],
+	    typeSpeed:20,
+	    startDelay:1200
+    }).show();
+  })
+})
 </script>
-
 </body>
+
 </html>
