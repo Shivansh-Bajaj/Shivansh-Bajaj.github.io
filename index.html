@@ -2,6 +2,7 @@
 <html>
 <head>
 	<title>Shivansh Bajaj | James</title>
+  <meta name="author" content="Made with ❤ by Jorge Epuñan - @csslab">
   <link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap.min.css"><!-- load bootstrap -->
   <style>
     html                    { overflow-y:scroll; text:white;}
@@ -69,7 +70,7 @@
 
    <font size=4 id="typed"></font><br /><br />
   </div>
-  	<div id="timeline">
+  	<div id="timeline" class="hide">
   		<ul id="dates">
   			<li><a href="#tripshire" class="selected">Tripshire</a></li>
   			<li><a href="#consulto">Consultoapp</a></li>
@@ -126,6 +127,7 @@
 </div>
 <script>
 $(window).load(function(){
+  $("#timeline").hide();
   $("#work").click(function () {
     console.log("work");
     $("#typed").typed({
@@ -134,9 +136,10 @@ $(window).load(function(){
 	    startDelay:1200
     }).hide();
     $("#abouthead").typed({
-        strings:['Some of previous my work'],
+        strings:['My Work'],
         typeSpeed:10
     }).show();
+    $("#timeline").removeClass('hide');
     $("#timeline").fadeIn(500);
   });
   $("#aboutme").click(function () {
@@ -147,7 +150,7 @@ $(window).load(function(){
         typeSpeed:10
     }).show();
     $("#typed").typed({
-        strings:['<br />I am passionate developer a music lover.<br />'],
+        strings:['<br />I am Full Stack developer and a Computer Science student currently pursuing my BTech from The LNM Institute of Information Technology, Jaipur.<br />'],
 	    typeSpeed:20,
 	    startDelay:1200
     }).show();
