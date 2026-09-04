@@ -1,0 +1,317 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Visheshak — विशेषक</title>
+<style>
+  :root{
+    --indigo-deep:#141026; --indigo:#1e1838; --indigo-soft:#2a2250;
+    --saffron:#f4900c; --saffron-soft:#ffb84d;
+    --gold:#d4af37; --cream:#f6efe3; --muted:#a89ec4;
+    --green:#2fbf71; --red:#e4572e; --line:#3a3160;
+  }
+  *{box-sizing:border-box;margin:0}
+  body{
+    background:var(--indigo-deep); color:var(--cream);
+    font:15px/1.55 "Avenir Next","Segoe UI",system-ui,sans-serif;
+    min-height:100vh;
+  }
+  /* subtle paisley-ish dot lattice */
+  body::before{content:"";position:fixed;inset:0;pointer-events:none;opacity:.35;
+    background-image:radial-gradient(circle at 1px 1px, #2e2757 1px, transparent 1.6px);
+    background-size:26px 26px}
+  .wrap{position:relative;max-width:1080px;margin:0 auto;padding:28px 20px 60px}
+
+  header{display:flex;align-items:baseline;gap:16px;flex-wrap:wrap;
+    border-bottom:2px solid var(--gold);padding-bottom:14px;margin-bottom:22px}
+  .devanagari{font-size:2.4rem;color:var(--saffron);font-weight:700;
+    text-shadow:0 0 24px rgba(244,144,12,.35)}
+  h1{font-size:1.5rem;letter-spacing:.14em;text-transform:uppercase;font-weight:600}
+  .tag{color:var(--muted);font-size:.9rem}
+  .pill{margin-left:auto;padding:5px 14px;border-radius:999px;font-size:.8rem;
+    border:1px solid var(--line);background:var(--indigo)}
+  .pill.open{border-color:var(--green);color:var(--green)}
+  .pill.closed{border-color:var(--saffron);color:var(--saffron-soft)}
+
+  .stats{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));
+    gap:14px;margin-bottom:26px}
+  .stat{background:linear-gradient(160deg,var(--indigo),var(--indigo-soft));
+    border:1px solid var(--line);border-top:3px solid var(--saffron);
+    border-radius:10px;padding:14px 16px}
+  .stat .label{font-size:.72rem;letter-spacing:.12em;text-transform:uppercase;color:var(--muted)}
+  .stat .value{font-size:1.55rem;font-weight:700;margin-top:4px;font-variant-numeric:tabular-nums}
+  .up{color:var(--green)} .down{color:var(--red)}
+
+  h2{font-size:1.02rem;letter-spacing:.12em;text-transform:uppercase;color:var(--gold);
+    margin:30px 0 12px;display:flex;align-items:center;gap:10px}
+  h2::after{content:"";flex:1;height:1px;background:linear-gradient(90deg,var(--gold),transparent)}
+
+  .board{width:100%;overflow-x:auto}
+  table{width:100%;border-collapse:collapse;background:var(--indigo);
+    border:1px solid var(--line);border-radius:10px;overflow:hidden}
+  th,td{padding:10px 14px;text-align:right;white-space:nowrap;
+    font-variant-numeric:tabular-nums}
+  th:first-child,td:first-child{text-align:left}
+  thead th{background:var(--indigo-soft);color:var(--saffron-soft);
+    font-size:.72rem;letter-spacing:.12em;text-transform:uppercase}
+  tbody tr{border-top:1px solid var(--line)}
+  tbody tr:hover{background:#251d47}
+  .contract{color:var(--muted);font-size:.8rem}
+  .empty{padding:26px;text-align:center;color:var(--muted);font-style:italic}
+
+  .strategy{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:14px}
+  .card{background:var(--indigo);border:1px solid var(--line);border-left:3px solid var(--gold);
+    border-radius:10px;padding:16px 18px}
+  .card h3{color:var(--saffron-soft);font-size:.95rem;margin-bottom:6px}
+  .card p{color:#d8d0e8;font-size:.9rem}
+  .card b{color:var(--cream)}
+
+  .flow{display:flex;flex-direction:column;align-items:center;gap:2px;margin-top:4px}
+  .fstage{width:100%;max-width:720px}
+  .fbox{background:var(--indigo);border:1px solid var(--line);border-left:3px solid var(--saffron);
+    border-radius:10px;padding:12px 16px}
+  .fbox.veto{border-left-color:var(--red)}
+  .fbox b{color:var(--saffron-soft);letter-spacing:.08em;font-size:.8rem;display:block;margin-bottom:3px}
+  .fbox.veto b{color:#ff8b73}
+  .fbox span{color:#d8d0e8;font-size:.85rem}
+  .fbranches{display:flex;flex-wrap:wrap;gap:6px;margin-top:9px}
+  .fbranches em{font-style:normal;font-size:.72rem;padding:3px 10px;border-radius:999px;
+    border:1px solid var(--line);background:var(--indigo-soft);color:var(--saffron-soft)}
+  .fbranches em.dim{color:var(--muted)}
+  .farrow{color:var(--gold);font-size:.8rem;line-height:1.4}
+  .fnote{margin-top:10px;color:var(--muted);font-size:.78rem;font-style:italic;text-align:center}
+  .fnote b{color:var(--cream)}
+  footer{margin-top:36px;color:var(--muted);font-size:.78rem;text-align:center}
+  footer .om{color:var(--gold)}
+  #err{display:none;margin:10px 0;padding:10px 14px;border:1px solid var(--red);
+    border-radius:8px;color:var(--red);background:rgba(228,87,46,.08)}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <header>
+    <span class="devanagari">विशेषक</span>
+    <div>
+      <h1>Visheshak</h1>
+      <div class="tag">the discerner · autonomous defined-risk options agent · Alpaca paper</div>
+    </div>
+    <span id="market" class="pill">…</span>
+  </header>
+
+  <div id="err"></div>
+
+  <div class="stats">
+    <div class="stat"><div class="label">Portfolio Equity</div><div class="value" id="equity">—</div></div>
+    <div class="stat"><div class="label">Day P&amp;L</div><div class="value" id="daypnl">—</div></div>
+    <div class="stat"><div class="label">Cash Available</div><div class="value" id="cash">—</div></div>
+    <div class="stat"><div class="label">Options Buying Power</div><div class="value" id="obp">—</div></div>
+  </div>
+
+  <h2>Active Trades <span style="font-size:.7rem;color:var(--muted);letter-spacing:0;text-transform:none">live from Alpaca · grouped by structure</span></h2>
+  <div class="board">
+    <table>
+      <thead><tr>
+        <th>Structure</th><th>Expiry</th><th>Qty</th><th>Entry</th>
+        <th>Cost to Close</th><th>P&amp;L</th><th>Max Loss</th><th>Buffer to Short Strike</th>
+      </tr></thead>
+      <tbody id="structures"><tr><td colspan="8" class="empty">loading…</td></tr></tbody>
+    </table>
+  </div>
+
+  <h2>Equity Curve <span style="font-size:.7rem;color:var(--muted);letter-spacing:0;text-transform:none">from the agent's journal</span></h2>
+  <div class="card" style="border-left:3px solid var(--saffron)">
+    <svg id="curve" viewBox="0 0 800 180" width="100%" height="180" preserveAspectRatio="none" role="img" aria-label="Equity curve"></svg>
+    <div id="curve-note" class="contract" style="text-align:right"></div>
+  </div>
+
+  <details style="margin-top:14px">
+    <summary style="cursor:pointer;color:var(--muted);font-size:.85rem">Individual legs (raw broker positions)</summary>
+    <div class="board" style="margin-top:10px">
+      <table>
+        <thead><tr>
+          <th>Position</th><th>Side</th><th>Qty</th><th>Avg Entry</th>
+          <th>Market Value</th><th>Unrealized P&amp;L</th><th>P&amp;L %</th>
+        </tr></thead>
+        <tbody id="positions"><tr><td colspan="7" class="empty">loading…</td></tr></tbody>
+      </table>
+    </div>
+  </details>
+
+  <h2>Decision Flow <span style="font-size:.7rem;color:var(--muted);letter-spacing:0;text-transform:none">one cycle, every 10 minutes</span></h2>
+  <div class="flow">
+    <div class="fstage">
+      <div class="fbox"><b>SCOUT</b><span>reads live chains, builds a fully-priced candidate menu — strikes at 15–25Δ, quotes filtered, max loss computed</span></div>
+    </div>
+    <div class="farrow">▼</div>
+    <div class="fstage">
+      <div class="fbox"><b>STRATEGIST · LLM</b><span>classifies the regime from stats + news, then picks from the menu — or abstains</span>
+        <div class="fbranches">
+          <em>rangebound → iron condor</em>
+          <em>uptrend → put credit spread</em>
+          <em>downtrend → call credit spread</em>
+          <em>momentum → satellite vertical</em>
+          <em class="dim">unclear → abstain</em>
+        </div></div>
+    </div>
+    <div class="farrow">▼</div>
+    <div class="fstage">
+      <div class="fbox veto"><b>RISK OFFICER · pure code</b><span>absolute veto: 1%/structure · 20% total · position caps · event blackouts · news-storm gate · daily halt · kill floor</span></div>
+    </div>
+    <div class="farrow">▼</div>
+    <div class="fstage">
+      <div class="fbox"><b>EXECUTOR</b><span>atomic multi-leg limit order; escalates once, then cancels and walks away — never chases</span></div>
+    </div>
+    <div class="farrow">▼</div>
+    <div class="fstage">
+      <div class="fbox"><b>MONITOR · every 5 min</b><span>take profit at 35% of credit (+40% debit) · stop at 1.6× credit (−35% debit) · pin-risk close · hard flatten deadline</span></div>
+    </div>
+    <div class="fnote">every arrow that fails resolves to <b>no trade</b> or <b>close position</b> — and every step is journaled</div>
+  </div>
+
+  <h2>The Strategy</h2>
+  <div class="strategy">
+    <div class="card"><h3>1 · Sell time, define risk</h3>
+      <p>The core book sells <b>short-dated credit spreads and iron condors on
+      SPY, QQQ, IWM &amp; DIA</b> — short strikes at 15–25 delta. Every structure
+      has a hard, known maximum loss before it is ever placed. Theta is earned
+      daily whether the market trends or naps.</p></div>
+    <div class="card"><h3>2 · Regime playbook</h3>
+      <p>An LLM Strategist reads a machine-built brief and maps regime to
+      structure: <b>uptrend → put credit spread · downtrend → call credit
+      spread · rangebound → iron condor · unclear → abstain</b>. It can only
+      pick from pre-priced candidates — never invent a strike or a price.</p></div>
+    <div class="card"><h3>3 · Momentum satellites</h3>
+      <p>At most <b>two small debit verticals</b> on mega-caps (NVDA, AAPL,
+      MSFT, META, AMZN, TSLA, GOOGL, AVGO, AMD) when momentum is strong —
+      capped risk, capped count.</p></div>
+    <div class="card"><h3>4 · The Risk Officer's veto</h3>
+      <p>Pure deterministic code enforces <b>1% max loss per structure, 20%
+      total open risk, daily-loss halt, equity kill floor, macro-event
+      blackouts and a news-storm gate</b>. The LLM proposes; code disposes.
+      Every failure path degrades to “no trade”, never to an unchecked one.</p></div>
+    <div class="card"><h3>5 · Managed exits</h3>
+      <p>Credits: take profit at <b>35% of credit</b>, stop at <b>1.6×</b>.
+      Debits: <b>+40% / −35%</b>. Pin-risk rule closes anything hugging a
+      short strike on expiry afternoon; everything flattens before the final
+      deadline.</p></div>
+    <div class="card"><h3>6 · Everything journaled</h3>
+      <p>Every brief, decision, veto, order and exit is written to an
+      append-only journal — the agent's full reasoning trail is auditable
+      after the fact.</p></div>
+  </div>
+
+  <footer><span class="om">॥</span> विशेषक — “the one who discerns” · live overview · refreshes every 15s <span class="om">॥</span></footer>
+</div>
+
+<script>
+const $ = id => document.getElementById(id);
+const usd = v => (v<0?"-":"") + "$" + Math.abs(v).toLocaleString("en-US",{minimumFractionDigits:2,maximumFractionDigits:2});
+
+// OCC contract symbol -> human label, e.g. SPY260903P00765000
+function occ(sym){
+  const m = /^([A-Z.]{1,6})(\d{2})(\d{2})(\d{2})([CP])(\d{8})$/.exec(sym);
+  if(!m) return null;
+  const strike = parseInt(m[6],10)/1000;
+  return `${m[1]} ${m[3]}/${m[4]}/${m[2]} ${strike} ${m[5]==="P"?"PUT":"CALL"}`;
+}
+
+function pnlCell(v, pct){
+  const n = parseFloat(v), cls = n>=0 ? "up" : "down", sign = n>=0 ? "+" : "";
+  const p = pct===undefined ? "" : `${sign}${(parseFloat(pct)*100).toFixed(1)}%`;
+  return [`<td class="${cls}">${sign}${usd(n).replace("$-","-$")}</td>`,
+          pct===undefined ? "" : `<td class="${cls}">${p}</td>`];
+}
+
+async function refresh(){
+  try{
+    const r = await fetch("/api/overview");
+    if(!r.ok) throw new Error((await r.json()).error || r.status);
+    const d = await r.json();
+    $("err").style.display = "none";
+
+    $("equity").textContent = usd(d.account.equity);
+    $("cash").textContent = usd(d.account.cash);
+    $("obp").textContent = usd(d.account.options_buying_power);
+    const dp = d.account.daily_pnl_usd, dpc = d.account.daily_pnl_pct;
+    $("daypnl").textContent = `${dp>=0?"+":""}${usd(dp)} (${dpc>=0?"+":""}${dpc}%)`;
+    $("daypnl").className = "value " + (dp>=0 ? "up" : "down");
+
+    const mk = $("market");
+    mk.textContent = d.market.is_open ? "● Market Open" : "◌ Market Closed";
+    mk.className = "pill " + (d.market.is_open ? "open" : "closed");
+    mk.title = d.market.is_open ? ("closes " + d.market.next_close)
+                                : ("opens " + d.market.next_open);
+
+    const st = $("structures");
+    const STRAT = {iron_condor:"Iron Condor", put_credit_spread:"Put Credit Spread",
+      call_credit_spread:"Call Credit Spread", bull_call_debit_spread:"Bull Call Spread",
+      bear_put_debit_spread:"Bear Put Spread"};
+    if(!(d.structures||[]).length){
+      st.innerHTML = `<tr><td colspan="8" class="empty">No open structures — the agent is flat. Patience is also a position.</td></tr>`;
+    } else {
+      st.innerHTML = d.structures.map(s=>{
+        const cls = s.pnl==null ? "" : (s.pnl>=0 ? "up" : "down");
+        const pnl = s.pnl==null ? "—" : `${s.pnl>=0?"+":""}${usd(s.pnl)}`;
+        const entry = `${s.is_credit?"cr":"db"} ${s.entry_net.toFixed(2)}`;
+        const cost = s.current_cost==null ? "—" : s.current_cost.toFixed(2);
+        const buf = s.short_strike_distance_pct==null ? "—"
+          : `${s.short_strike_distance_pct.toFixed(2)}%` +
+            (s.short_strike_distance_pct < 0.5 ? " ⚠" : "");
+        return `<tr><td><b>${s.underlying}</b> ${STRAT[s.strategy]||s.strategy}`+
+               `<div class="contract">shorts ${(s.short_strikes||[]).join(" / ")}${s.spot?` · spot ${s.spot}`:""}</div></td>`+
+               `<td>${s.expiry}</td><td>${s.qty}</td><td>${entry}</td><td>${cost}</td>`+
+               `<td class="${cls}">${pnl}</td><td>${usd(s.max_loss)}</td><td>${buf}</td></tr>`;
+      }).join("");
+    }
+
+    drawCurve(d.equity_curve||[]);
+
+    const tb = $("positions");
+    if(!d.positions.length){
+      tb.innerHTML = `<tr><td colspan="7" class="empty">No open positions — the agent is flat. Patience is also a position.</td></tr>`;
+    } else {
+      tb.innerHTML = d.positions.map(p=>{
+        const nice = occ(p.symbol);
+        const name = nice ? `${nice}<div class="contract">${p.symbol}</div>` : p.symbol;
+        const [pl, plpc] = pnlCell(p.unrealized_pl, p.unrealized_plpc);
+        return `<tr><td>${name}</td><td>${p.side}</td><td>${p.qty}</td>`+
+               `<td>${usd(parseFloat(p.avg_entry))}</td><td>${usd(parseFloat(p.market_value))}</td>${pl}${plpc}</tr>`;
+      }).join("");
+    }
+  }catch(e){
+    $("err").textContent = "Could not reach Alpaca: " + e.message;
+    $("err").style.display = "block";
+  }
+}
+function drawCurve(pts){
+  const svg = $("curve"), note = $("curve-note");
+  if(pts.length < 2){
+    svg.innerHTML = `<text x="400" y="95" fill="#a89ec4" font-size="13" text-anchor="middle" font-style="italic">equity marks appear here once the agent has journaled a few passes</text>`;
+    note.textContent = "";
+    return;
+  }
+  const W=800, H=180, PAD=8;
+  const eq = pts.map(p=>p.equity);
+  let lo = Math.min(...eq), hi = Math.max(...eq);
+  if(hi-lo < 20){ const m=(hi+lo)/2; lo=m-10; hi=m+10; }   // flatline guard
+  const x = i => PAD + i*(W-2*PAD)/(pts.length-1);
+  const y = v => H-PAD - (v-lo)*(H-2*PAD)/(hi-lo);
+  const line = pts.map((p,i)=>`${x(i).toFixed(1)},${y(p.equity).toFixed(1)}`).join(" ");
+  const start = pts[0].equity, end = pts[pts.length-1].equity;
+  const col = end >= start ? "#2fbf71" : "#e4572e";
+  const base = y(start);
+  svg.innerHTML =
+    `<polygon points="${x(0)},${base} ${line} ${x(pts.length-1)},${base}" fill="${col}" opacity="0.12"/>`+
+    `<line x1="${PAD}" y1="${base}" x2="${W-PAD}" y2="${base}" stroke="#3a3160" stroke-dasharray="4 4"/>`+
+    `<polyline points="${line}" fill="none" stroke="${col}" stroke-width="2"/>`+
+    `<circle cx="${x(pts.length-1)}" cy="${y(end)}" r="4" fill="${col}"/>`;
+  const chg = end - start;
+  note.textContent = `${pts.length} marks · ${usd(start)} → ${usd(end)} (${chg>=0?"+":""}${usd(chg)})`;
+}
+
+refresh();
+setInterval(refresh, 15000);
+</script>
+</body>
+</html>

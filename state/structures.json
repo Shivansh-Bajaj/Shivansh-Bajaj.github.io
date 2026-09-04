@@ -1,0 +1,42 @@
+[
+  {
+    "structure_id": "SPY-iron_condor-2026-09-03-c5a128",
+    "strategy": "iron_condor",
+    "underlying": "SPY",
+    "expiry": "2026-09-03",
+    "legs": [
+      {
+        "symbol": "SPY260903P00758000",
+        "side": "sell",
+        "ratio_qty": 1
+      },
+      {
+        "symbol": "SPY260903P00753000",
+        "side": "buy",
+        "ratio_qty": 1
+      },
+      {
+        "symbol": "SPY260903C00772000",
+        "side": "sell",
+        "ratio_qty": 1
+      },
+      {
+        "symbol": "SPY260903C00777000",
+        "side": "buy",
+        "ratio_qty": 1
+      }
+    ],
+    "qty": 2,
+    "entry_net": 1.15,
+    "is_credit": true,
+    "width": 5.0,
+    "max_loss_total": 770.0,
+    "short_strikes": [
+      758.0,
+      772.0
+    ],
+    "opened_at": "2026-08-31T10:49:35.744139-04:00",
+    "status": "open",
+    "close_reason": null
+  }
+]

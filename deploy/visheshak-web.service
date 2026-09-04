@@ -1,0 +1,17 @@
+[Unit]
+Description=Visheshak dashboard (webui.py)
+After=network-online.target
+Wants=network-online.target
+
+[Service]
+Type=simple
+User=ubuntu
+WorkingDirectory=/home/ubuntu/visheshak
+Environment=HOST=0.0.0.0
+Environment=PORT=8501
+ExecStart=/home/ubuntu/visheshak/.venv/bin/python webui.py
+Restart=always
+RestartSec=10
+
+[Install]
+WantedBy=multi-user.target

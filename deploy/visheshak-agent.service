@@ -1,0 +1,17 @@
+[Unit]
+Description=Visheshak trading agent (main.py run)
+After=network-online.target
+Wants=network-online.target
+
+[Service]
+Type=simple
+User=ubuntu
+WorkingDirectory=/home/ubuntu/visheshak
+ExecStart=/home/ubuntu/visheshak/.venv/bin/python main.py run
+Restart=always
+RestartSec=30
+StandardOutput=append:/home/ubuntu/visheshak/run.log
+StandardError=append:/home/ubuntu/visheshak/run.log
+
+[Install]
+WantedBy=multi-user.target
